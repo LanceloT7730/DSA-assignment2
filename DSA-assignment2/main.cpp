@@ -7,8 +7,26 @@
 
 #include <iostream>
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+using namespace std;
+
+struct Node {
+    int data;
+    Node *next;
+    
+    Node() {
+        data = 0;
+        next = NULL;
+    }
+};
+
+class BubbleSort {
+    
+};
+
+
+int main() {
+    
+    
+    
     return 0;
 }
