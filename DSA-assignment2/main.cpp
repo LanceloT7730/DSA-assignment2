@@ -97,7 +97,7 @@ public:
         if (!head) {
             cout << "Empty list\n";
             return 0;
-        } else if(!curr) {
+        } else if (!curr) {
             cout << "Reached the end of the list\n";
             return 0;
         }
@@ -132,6 +132,71 @@ public:
         }
 
     }
+
+    /*void InsertionSort() {
+        if(!head) {
+            cout << "List is empty\n";
+            return;
+        }
+        auto *sortedListList = new Node;
+        sortedListList->data = head->data;
+        Node *temp_sortedList = sortedListList;
+        Node *temp = head;
+        while (temp) {
+            if(temp->data < temp_sortedList->data) {
+                auto *newNode = new Node;
+                newNode->data = temp->data;
+                newNode->next = temp_sortedList;
+                temp_sortedList = newNode;
+                temp = temp->next;
+            }else {
+                while( (temp->data > temp_sortedList->data) && temp_sortedList) {
+                    temp_sortedList = temp_sortedList->next;
+                }
+                auto *newNode = new Node;
+                newNode->data = temp->data;
+                temp_sortedList->next = newNode;
+                temp = temp->next;
+            }
+        }
+        head = temp_sortedList;
+    }*/
+
+    void InsertionSort() {
+        Node *sortedList = NULL;
+        Node *currUnsortedNode = head;
+        while (currUnsortedNode) {
+            if (!sortedList) {
+                Node *newNode = new Node;
+                newNode->data = currUnsortedNode->data;
+                newNode->next = sortedList;
+                sortedList = newNode;
+            } else {
+                Node *currentSortedNode = sortedList;
+                Node *prev = NULL;
+                bool flag = false;
+                while (currentSortedNode && !flag) {
+                    if (currentSortedNode->data > currUnsortedNode->data) flag = true;
+                    else {
+                        prev = currentSortedNode;
+                        currentSortedNode = currentSortedNode->next;
+                    }
+                }
+                Node *newNode = new Node;
+                newNode->data = currUnsortedNode->data;
+                if (!prev) {
+                    newNode->next = sortedList;
+                    sortedList = newNode;
+                } else {
+                    newNode->next = currentSortedNode;
+                    prev->next = newNode;
+                }
+            }
+            currUnsortedNode = currUnsortedNode->next;
+        }
+        head = sortedList;
+    }
+
 };
 
 
@@ -147,7 +212,7 @@ int main() {
     list1.insertAtLast(1);
     list1.printAll();
 
-    list1.SelectionSort();
+    list1.InsertionSort();
     cout << "After sorting\n";
     list1.printAll();
 
